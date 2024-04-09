@@ -61,7 +61,7 @@
                 </td>
                 <td><a href="{{route('tarea.edit',['tarea' => $tarea])}}">Editar</a></td>
                 <td>
-                    <form method="post" action="{{route('tarea.destroy', ['tarea' => $tarea->id])}}">
+                    <form method="post" action="{{route('tarea.destroy', ['tarea' => $tarea])}}">
                         @csrf
                         @method('delete')
                         <input type="submit" value="Delete" >
