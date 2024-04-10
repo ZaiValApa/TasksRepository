@@ -6,7 +6,43 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function create(){
-        return 'Hello from our controller';
+
+    public function index()
+    {
+        return view('users.index');
+    }
+
+    public function create()
+    {
+        //
+    }
+
+    public function store(Request $request)
+    {
+        //
+    }
+
+
+    public function show(string $id)
+    {
+        //
+    }
+
+
+    public function edit(string $id)
+    {
+        //
+    }
+
+
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+
+    public function destroy(string $id)
+    {
+        //
     }
 }

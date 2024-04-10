@@ -7,17 +7,19 @@
     <title>Tareas</title>
 </head>
 <body>
-    <h1>To Do List</h1>
 
-    <div>
-        @if(session()->has('success'))
-           <div>
-                {{session('success')}}
-            </div>
-        @endif
-    </div>
+    <div style="border: 2px solid rgb(143, 135, 135); padding:3em; margin-left:20em;
+    margin-right:20em;">
 
-    <div>
+        <h1>To Do List</h1>
+
+        <div>
+            @if(session()->has('success'))
+            <div>
+                    {{session('success')}}
+                </div>
+            @endif
+        </div>
         <div>
             <a href="{{route('tarea.create')}}">Añadir una Tarea</a>
         </div>
