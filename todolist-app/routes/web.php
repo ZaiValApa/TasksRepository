@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\TareaController;
 
 /*
@@ -28,3 +29,4 @@ Route::delete('/tarea/{tarea}/tarea',[TareaController::class, 'destroy'])->name(
 */
 
 Route::resource('tarea', TareaController::class)->except(['show']);
+Route::resource('user', UserController::class)->except(['show']);

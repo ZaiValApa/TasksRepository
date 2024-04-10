@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\Tarea;
 use Illuminate\Http\Request;
+use App\Http\Requests\TareaRequest;
+use App\Http\Resources\TareaResource;
+
 
 class TareaController extends Controller
 {
@@ -10,43 +13,38 @@ class TareaController extends Controller
     {
         $tareas = Tarea::all();
 
-        return view('tareas.index', ['tareas' => $tareas]);
+        return view('tareas.index', ['tareas' => TareaResource::collection($tareas)]);
     }
 
     public function create()
     {
-        return view('tareas.create');
+        return view('tareas.create',[
+            'priorities' => Tarea::getPriorities(),
+            'statuses' => Tarea::getStatuses(),
+        ]);
     }
 
-    public function store(Request $request)
+    public function store(TareaRequest $request)
     {
-        $data = $request->validate([
-            'tarea' => 'required',
-            'descripcion' => 'nullable',
-            'estado' => 'required',
-            'urgencia' => 'required',
-        ]);
 
-        $newTarea = Tarea::create($data);
+        Tarea::create($request->validated());
 
         return redirect(route('tarea.index'));
     }
 
     public function edit(Tarea $tarea)
     {
-        return view('tareas.edit', ['tarea' => $tarea]);
+        return view('tareas.edit',[
+            'tarea' => $tarea,
+            'priorities' => Tarea::getPriorities(),
+            'statuses' => Tarea::getStatuses(),
+        ] );
     }
 
-    public function update(Tarea $tarea, Request $request)
+    public function update(Tarea $tarea, TareaRequest $request)
     {
-        $data = $request->validate([
-            'tarea' => 'required',
-            'descripcion' => 'nullable',
-            'estado' => 'required',
-            'urgencia' => 'required',
-        ]);
 
-        $tarea->update($data);
+        $tarea->update($request->validated());
 
         return redirect(route('tarea.index'))->with('success', 'La tarea se ha actualizado correctamente');
     }

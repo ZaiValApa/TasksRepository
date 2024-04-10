@@ -13,7 +13,7 @@
         @if(session()->has('success'))
            <div>
                 {{session('success')}}
-            </div> 
+            </div>
         @endif
     </div>
 
@@ -37,17 +37,7 @@
                 <td>{{$tarea->id}}</td>
                 <td>{{$tarea->tarea}}</td>
                 <td>{{$tarea->descripcion}}</td>
-                <td>
-                   @if ($tarea->estado==1)
-                       EN ESPERA
-                   @endif
-                   @if ($tarea->estado==2)
-                       EN PROCESO
-                   @endif
-                   @if ($tarea->estado==3)
-                       COMPLETADA
-                   @endif
-                </td>
+                <td>{{$tarea->estado}}</td>
                 <td>
                     @if ($tarea->urgencia==1)
                         ALTA
