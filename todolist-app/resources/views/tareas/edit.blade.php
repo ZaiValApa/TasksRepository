@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Editar una Tarea</h1>
-    
+
    <div>
         @if($errors->any())
         <ul>
@@ -28,7 +28,7 @@
         <br>
         <div>
             <label>Descripción: </label>
-            <input type="text" name="description" placeholder="Escriba la descripción" value="{{$tarea->descripcion}}">
+            <input type="text" name="descripcion" placeholder="Escriba la descripción" value="{{$tarea->descripcion}}">
         </div>
         <br>
         <div>
