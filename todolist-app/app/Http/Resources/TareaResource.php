@@ -11,7 +11,7 @@ class TareaResource extends JsonResource
     public function toArray(Request $request): array
     {
         $statusDescription = match ($this->estado) {
-            1 => 'Pendiente',
+            1 => 'En espera',
             2 => 'En proceso',
             3 => 'Completada',
             default => 'Desconocido',
@@ -28,8 +28,8 @@ class TareaResource extends JsonResource
             'id' => $this->id,
             'tarea' => $this->tarea,
             'descripcion' => $this->descripcion,
-            'estado' => $this->$statusDescription,
-            'urgencia' => $this->$priorityDescription,
+            'estado' => (string) $statusDescription,
+            'urgencia' => (string) $priorityDescription,
         ];
     }
 }

@@ -24,6 +24,22 @@
             <a href="{{route('tarea.create')}}">Añadir una Tarea</a>
         </div>
         <br>
+        {{
+            json_encode($tareas)
+
+        }}
+        <br>
+        {{
+            json_encode($tareas[0])
+        }}
+        <br>
+        {{
+            json_encode($tareas[0]->estado)
+        }}
+        <br>
+        {{
+            gettype($tareas[0])
+        }}
         <table border=1>
             <tr>
                 <th>ID</th>
@@ -40,16 +56,7 @@
                 <td>{{$tarea->tarea}}</td>
                 <td>{{$tarea->descripcion}}</td>
                 <td>{{$tarea->estado}}</td>
-                <td>
-                    @if ($tarea->urgencia==1)
-                        ALTA
-                    @endif
-                    @if ($tarea->urgencia==2)
-                        MEDIA
-                    @endif
-                    @if ($tarea->urgencia==3)
-                        BAJA
-                    @endif
+                <td>{{$tarea->urgencia}}
                 </td>
                 <td><a href="{{route('tarea.edit',['tarea' => $tarea])}}">Editar</a></td>
                 <td>

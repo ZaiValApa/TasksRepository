@@ -29,9 +29,9 @@ class Tarea extends Model
     public static function getPriorities()
     {
         return[
-            self::LOW => 'Baja',
+            self::HIGH => 'Alta',
             self::MEDIUM => 'Media',
-            self::HIGH => 'Alta'
+            self::LOW => 'Baja'
         ];
     }
 
