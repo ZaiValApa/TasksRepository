@@ -4,8 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TareaRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
+
     public function authorize(): bool
     {
         return true;
@@ -14,10 +15,8 @@ class TareaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tarea' => 'required',
-            'descripcion' => 'required',
-            'estado' => 'required',
-            'urgencia' => 'required',
+            'loginname' => ['required'],
+            'loginpassword' => ['required'],
         ];
     }
 }

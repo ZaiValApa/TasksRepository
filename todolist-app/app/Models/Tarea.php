@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Tarea extends Model
 {
@@ -19,28 +20,28 @@ class Tarea extends Model
     public const PROCESSING = 2;
     public const COMPLETED = 3;
 
-    protected $fillable = [
-       'tarea',
-       'descripcion',
-       'estado',
-       'urgencia'
-    ];
+    protected $fillable = ['tarea', 'descripcion', 'estado', 'urgencia', 'user_id'];
 
     public static function getPriorities()
     {
-        return[
-            self::HIGH => 'Alta',
+        return [
+            self::LOW => 'Baja',
             self::MEDIUM => 'Media',
-            self::LOW => 'Baja'
+            self::HIGH => 'Alta',
         ];
     }
 
     public static function getStatuses()
     {
-        return[
+            /* ['key' => self::WAITING, 'value' => 'En espera'],
+            ['key' => self::PROCESSING, 'value' => 'En proceso'],
+            ['key' => self::COMPLETED, 'value' => 'Completada']*/
+        return [
+
+
             self::WAITING => 'En espera',
             self::PROCESSING => 'En proceso',
-            self::COMPLETED => 'Completada'
+            self::COMPLETED => 'Completada',
         ];
     }
 }

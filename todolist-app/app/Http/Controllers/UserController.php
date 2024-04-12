@@ -1,43 +1,56 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
+use App\Models\Tarea;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use App\Http\Resources\TareaResource;
+use App\Http\Controllers\TareaController;
+use App\Http\Requests\LoginRequest;
 
 class UserController extends Controller
 {
-
     public function index()
     {
-        return view('users.index');
+        $tareas = Tarea::all();
+
+        return view('users.index', ['tareas' => TareaResource::collection($tareas)]);
     }
 
-    public function create()
+    public function store(UserRequest $request)
     {
-        //
+        $requestValid = $request->validated();
+        $requestValid['password'] = bcrypt($requestValid['password']);
+        $user = User::create($requestValid);
+
+        auth()->login($user);
+
+        return redirect('/');
+
     }
 
-    public function store(Request $request)
-    {
-        //
+    public function login(Request $request){
+
+        $requestValid=$request->validate([
+            'loginname' => ['required'],
+            'loginpassword' => ['required'],
+        ]);
+
+        if(auth()->attempt(['name'=>$requestValid['loginname'],'password'=>$requestValid['loginpassword']])){
+
+            $request->session()->regenerate();
+
+        }
+
+        return redirect('/');
     }
 
-
-    public function show(string $id)
+    public function logout()
     {
-        //
-    }
+        auth()->logout();
 
-
-    public function edit(string $id)
-    {
-        //
-    }
-
-
-    public function update(Request $request, string $id)
-    {
-        //
+        return redirect('/');
     }
 
 

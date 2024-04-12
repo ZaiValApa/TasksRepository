@@ -16,7 +16,7 @@ use App\Http\Controllers\TareaController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('users.index');
 });
 
 /*
@@ -28,5 +28,7 @@ Route::put('/tarea/{tarea}/update',[TareaController::class, 'update'])->name('ta
 Route::delete('/tarea/{tarea}/tarea',[TareaController::class, 'destroy'])->name('tarea.destroy');
 */
 
-Route::resource('tarea', TareaController::class)->except(['show']);
-Route::resource('user', UserController::class)->except(['show']);
+Route::resource('tarea', TareaController::class)->except(['show', 'index']);
+Route::resource('user', UserController::class)->except(['show', 'edit', 'update']);
+Route::post('/logout', [UserController::class,'logout']);
+Route::post('/login', [UserController::class,'login']);

@@ -39,7 +39,7 @@
 
             <select name="estado" value="{{ $tarea->estado }}">
 
-                @php($countS = 0)
+                {{ $countS = 0 }}
 
                 @foreach ($statuses as $status)
                     {{ $countS++ }}
@@ -52,7 +52,7 @@
         <div>
             <label>Urgencia:</label>
             <select name="urgencia" value="{{ $tarea->urgencia }}">
-                @php($countP = 0)
+                {{ $countP = 0 }}
 
                 @foreach ($priorities as $priority)
                     {{ $countP++ }}

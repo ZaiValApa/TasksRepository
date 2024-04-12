@@ -1,24 +1,24 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
 use App\Models\Tarea;
-use Illuminate\Http\Request;
 use App\Http\Requests\TareaRequest;
 use App\Http\Resources\TareaResource;
 
-
 class TareaController extends Controller
 {
-    public function index()
+   /* public function index()
     {
         $tareas = Tarea::all();
 
         return view('tareas.index', ['tareas' => TareaResource::collection($tareas)]);
-    }
+
+    }*/
 
     public function create()
     {
-        return view('tareas.create',[
+        return view('tareas.create', [
             'priorities' => Tarea::getPriorities(),
             'statuses' => Tarea::getStatuses(),
         ]);
@@ -26,33 +26,33 @@ class TareaController extends Controller
 
     public function store(TareaRequest $request)
     {
+        $requestValid = $request->validated();
+        $requestValid['user_id']=auth()->id();
+        Tarea::create($requestValid);
 
-        Tarea::create($request->validated());
-
-        return redirect(route('tarea.index'));
+        return redirect('/');
     }
 
     public function edit(Tarea $tarea)
     {
-        return view('tareas.edit',[
+        return view('tareas.edit', [
             'tarea' => $tarea,
             'priorities' => Tarea::getPriorities(),
             'statuses' => Tarea::getStatuses(),
-        ] );
+        ]);
     }
 
     public function update(Tarea $tarea, TareaRequest $request)
     {
-
         $tarea->update($request->validated());
 
-        return redirect(route('tarea.index'))->with('success', 'La tarea se ha actualizado correctamente');
+        return redirect(route('user.index'))->with('success', 'La tarea se ha actualizado correctamente');
     }
 
     public function destroy(Tarea $tarea)
     {
         $tarea->delete();
 
-        return redirect(route('tarea.index'))->with('success', 'La tarea se ha borrado correctamente');
+        return redirect(route('user.index'))->with('success', 'La tarea se ha borrado correctamente');
     }
 }

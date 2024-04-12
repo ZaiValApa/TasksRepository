@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -17,6 +16,7 @@ return new class extends Migration
             $table->text('descripcion');
             $table->tinyInteger('estado');
             $table->tinyInteger('urgencia');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
