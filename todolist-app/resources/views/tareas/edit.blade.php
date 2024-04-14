@@ -20,7 +20,7 @@
         @endif
     </div>
 
-    <form method="post" action="{{ route('tareas.update', ['tarea' => $tarea]) }}">
+    <form method="POST" action="{{ route('tarea.update', ['tarea' => $tarea]) }}">
         @csrf
         @method('put')
         <div>
@@ -30,7 +30,8 @@
         <br>
         <div>
             <label>Descripción: </label>
-            <input type="text" name="descripcion" placeholder="Escriba la descripción" value="{{ $tarea->descripcion }}">
+            <input type="text" name="descripcion" placeholder="Escriba la descripción"
+                value="{{ $tarea->descripcion }}">
         </div>
         <br>
         <div>

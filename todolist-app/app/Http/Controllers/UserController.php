@@ -26,20 +26,17 @@ class UserController extends Controller
         auth()->login($user);
 
         return redirect('/');
-
     }
 
-    public function login(Request $request){
-
-        $requestValid=$request->validate([
+    public function login(Request $request)
+    {
+        $requestValid = $request->validate([
             'loginname' => ['required'],
             'loginpassword' => ['required'],
         ]);
 
-        if(auth()->attempt(['name'=>$requestValid['loginname'],'password'=>$requestValid['loginpassword']])){
-
+        if (auth()->attempt(['name' => $requestValid['loginname'], 'password' => $requestValid['loginpassword']])) {
             $request->session()->regenerate();
-
         }
 
         return redirect('/');
@@ -51,7 +48,6 @@ class UserController extends Controller
 
         return redirect('/');
     }
-
 
     public function destroy(string $id)
     {

@@ -12,13 +12,16 @@
     @auth
         <div style="border: 2px solid rgb(143, 135, 135); padding:3em; margin-left:20em;
         margin-right:20em;">
-            <form action="{{ route('user.logout') }}" method="POST">
-                @csrf
-                <button>Cerrar Sesión</button>
-            </form>
 
-            <h1>Bienvenido! </h1>
+            <div>
 
+                <form action="{{ route('user.logout') }}" method="POST">
+                    <button style="height:fit-content; float: right;">Cerrar Sesión</button>
+                    @csrf
+                </form>
+
+                <h1>Bienvenido! </h1>
+            </div>
             <div>
                 @if (session()->has('success'))
                     <div>
@@ -31,44 +34,50 @@
             </div>
             <br>
             <!--
-            {//{ json_encode($tareas) }}
-            <br>
-            {//{ json_encode($tareas[0]) }}
-            <br>
-            {//{ json_encode($tareas[0]->estado) }}
-            <br>
-            {//{ gettype($tareas[0]) }}-->
-
-            <table border="1">
-                <tr>
-                    <th>ID</th>
-                    <th>Tarea</th>
-                    <th>Descripción</th>
-                    <th>Estado</th>
-                    <th>Urgencia</th>
-                    <th>Editar</th>
-                    <th>Borrar</th>
-                </tr>
-                @foreach ($tareas as $tarea)
+                                {//{ json_encode($tareas) }}
+                                <br>
+                                {//{ json_encode($tareas[0]) }}
+                                <br>
+                                {//{ json_encode($tareas[0]->estado) }}
+                                <br>
+                                {//{ gettype($tareas[0]) }}
+                    -->
+            @if ($tareas->isNotEmpty())
+                <table border="1">
                     <tr>
-                        <td>{{ $tarea->id }}</td>
-                        <td>{{ $tarea->tarea }}</td>
-                        <td>{{ $tarea->descripcion }}</td>
-                        <td>{{ $tarea->estado }}</td>
-                        <td>{{ $tarea->urgencia }}</td>
-                        <td><a href="{{ route('tarea.update', ['tarea' => $tarea]) }}">Editar</a></td>
-                        <td>
-                            <form method="post" action="{{ route('tarea.destroy', ['tarea' => $tarea]) }}">
-                                @csrf
-                                @method('delete')
-                                <input type="submit" value="Eliminar">
-                            </form>
-                        </td>
+                        <th>ID</th>
+                        <th>Tarea</th>
+                        <th>Descripción</th>
+                        <th>Estado</th>
+                        <th>Urgencia</th>
+                        <th>Editar</th>
+                        <th>Borrar</th>
                     </tr>
-                @endforeach
-            </table>
-
-
+                    @foreach ($tareas as $tarea)
+                        <tr>
+                            <td>{{ $tarea->id }}</td>
+                            <td>{{ $tarea->tarea }}</td>
+                            <td>{{ $tarea->descripcion }}</td>
+                            <td>{{ $tarea->estado }}</td>
+                            <td>{{ $tarea->urgencia }}</td>
+                            <td><a href="{{ route('tarea.edit', ['tarea' => $tarea]) }}">Editar</a></td>
+                            <td>
+                                <form method="post" action="{{ route('tarea.destroy', ['tarea' => $tarea]) }}">
+                                    @csrf
+                                    @method('delete')
+                                    <input type="submit" value="Eliminar">
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
+            @else
+                <table border="1">
+                    <tr>
+                        <td>No hay tareas disponibles</td>
+                    </tr>
+                </table>
+            @endif
         </div>
     @else
         <div style="border: 2px solid rgb(143, 135, 135); padding:3em; margin-left:20em;

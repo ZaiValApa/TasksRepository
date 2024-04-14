@@ -51,7 +51,7 @@
             <select name="urgencia">
                 <option value="" disabled selected>Seleccione la Urgencia</option>
                 @foreach ($priorities as $priority)
-                <option value="{{ $priority['key'] }}">{{ $priority['value'] }}</option>
+                    <option value="{{ $priority['key'] }}">{{ $priority['value'] }}</option>
                 @endforeach
 
             </select>

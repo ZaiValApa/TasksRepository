@@ -9,11 +9,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class checkUser
 {
-
     public function handle(Request $request, Closure $next, ...$users): Response
     {
-        if ( $request->user() ){
-
+        if ($request->user()) {
         } else {
             // user is not logged in
         }

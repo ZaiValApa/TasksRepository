@@ -8,7 +8,7 @@ use App\Http\Resources\TareaResource;
 
 class TareaController extends Controller
 {
-   /* public function index()
+    /* public function index()
     {
         $tareas = Tarea::all();
 
@@ -27,7 +27,7 @@ class TareaController extends Controller
     public function store(TareaRequest $request)
     {
         $requestValid = $request->validated();
-        $requestValid['user_id']=auth()->id();
+        $requestValid['user_id'] = auth()->id();
         Tarea::create($requestValid);
 
         return redirect(route('users.index'));
@@ -35,7 +35,7 @@ class TareaController extends Controller
 
     public function edit(Tarea $tarea)
     {
-        return view('tarea.edit', [
+        return view('tareas.edit', [
             'tarea' => $tarea,
             'priorities' => Tarea::getPriorities(),
             'statuses' => Tarea::getStatuses(),
@@ -46,7 +46,7 @@ class TareaController extends Controller
     {
         $tarea->update($request->validated());
 
-        return redirect(route('user.index'))->with('success', 'La tarea se ha actualizado correctamente');
+        return redirect(route('users.index'))->with('success', 'La tarea se ha actualizado correctamente');
     }
 
     public function destroy(Tarea $tarea)
