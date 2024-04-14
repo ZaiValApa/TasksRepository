@@ -39,12 +39,10 @@
 
                 <option value="" disabled selected>Seleccione el Estado</option>
 
-                {{ $countS = 0 }}
-
                 @foreach ($statuses as $status)
-                    {{ $countS++ }}
-                    <option value="{{ $countS }}">{{ $status }}</option>
+                    <option value="{{ $status['key'] }}">{{ $status['value'] }}</option>
                 @endforeach
+
             </select>
         </div>
         <br>
@@ -52,10 +50,8 @@
             <label>Urgencia:</label>
             <select name="urgencia">
                 <option value="" disabled selected>Seleccione la Urgencia</option>
-                {{ $countP = 0 }}
                 @foreach ($priorities as $priority)
-                    {{ $countP++ }}
-                    <option value="{{ $countP }}">{{ $priority }}</option>
+                <option value="{{ $priority['key'] }}">{{ $priority['value'] }}</option>
                 @endforeach
 
             </select>
@@ -67,7 +63,7 @@
     </form>
     <br>
     <div>
-        <a href="{{ route('user.index') }}">Regresar</a>
+        <a href="/">Regresar</a>
     </div>
 </body>
 

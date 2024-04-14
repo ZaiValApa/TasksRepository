@@ -28,7 +28,9 @@ class TareaResource extends JsonResource
             'tarea' => $this->tarea,
             'descripcion' => $this->descripcion,
             'estado' => (string) $statusDescription,
+            'estado_key'=> $this->estado,
             'urgencia' => (string) $priorityDescription,
+            'urgencia_key'=> $this->urgencia,
         ];
     }
 }

@@ -25,23 +25,23 @@ class Tarea extends Model
     public static function getPriorities()
     {
         return [
-            self::LOW => 'Baja',
-            self::MEDIUM => 'Media',
-            self::HIGH => 'Alta',
+            ['key' => self::LOW, 'value' => 'Bajo'],
+            ['key' => self::MEDIUM, 'value' => 'Medio'],
+            ['key' => self::HIGH, 'value' => 'Alto']
         ];
     }
 
     public static function getStatuses()
     {
-            /* ['key' => self::WAITING, 'value' => 'En espera'],
-            ['key' => self::PROCESSING, 'value' => 'En proceso'],
-            ['key' => self::COMPLETED, 'value' => 'Completada']*/
+            /* self::WAITING => 'En espera',
+            self::PROCESSING => 'En proceso',
+            self::COMPLETED => 'Completada',*/
         return [
 
+            ['key' => self::WAITING, 'value' => 'En espera'],
+            ['key' => self::PROCESSING, 'value' => 'En proceso'],
+            ['key' => self::COMPLETED, 'value' => 'Completada']
 
-            self::WAITING => 'En espera',
-            self::PROCESSING => 'En proceso',
-            self::COMPLETED => 'Completada',
         ];
     }
 }

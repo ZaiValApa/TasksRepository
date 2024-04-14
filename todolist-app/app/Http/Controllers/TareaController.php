@@ -30,12 +30,12 @@ class TareaController extends Controller
         $requestValid['user_id']=auth()->id();
         Tarea::create($requestValid);
 
-        return redirect('/');
+        return redirect(route('users.index'));
     }
 
     public function edit(Tarea $tarea)
     {
-        return view('tareas.edit', [
+        return view('tarea.edit', [
             'tarea' => $tarea,
             'priorities' => Tarea::getPriorities(),
             'statuses' => Tarea::getStatuses(),
@@ -53,6 +53,6 @@ class TareaController extends Controller
     {
         $tarea->delete();
 
-        return redirect(route('user.index'))->with('success', 'La tarea se ha borrado correctamente');
+        return redirect(route('users.index'))->with('success', 'La tarea se ha borrado correctamente');
     }
 }

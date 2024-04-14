@@ -13,12 +13,11 @@ class UserController extends Controller
 {
     public function index()
     {
-        $tareas = Tarea::all();
-
+        $tareas = Tarea::where('user_id', auth()->id())->get();
         return view('users.index', ['tareas' => TareaResource::collection($tareas)]);
     }
 
-    public function store(UserRequest $request)
+    public function create(UserRequest $request)
     {
         $requestValid = $request->validated();
         $requestValid['password'] = bcrypt($requestValid['password']);

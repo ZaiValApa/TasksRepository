@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <h1>Editar una Tarea</h1>
+    <h1>Editar Tarea</h1>
 
     <div>
         @if ($errors->any())
@@ -20,7 +20,7 @@
         @endif
     </div>
 
-    <form method="post" action="{{ route('tarea.update', ['tarea' => $tarea]) }}">
+    <form method="post" action="{{ route('tareas.update', ['tarea' => $tarea]) }}">
         @csrf
         @method('put')
         <div>
@@ -30,34 +30,29 @@
         <br>
         <div>
             <label>Descripción: </label>
-            <input type="text" name="descripcion" placeholder="Escriba la descripción"
-                value="{{ $tarea->descripcion }}">
+            <input type="text" name="descripcion" placeholder="Escriba la descripción" value="{{ $tarea->descripcion }}">
         </div>
         <br>
         <div>
             <label>Estado:</label>
-
-            <select name="estado" value="{{ $tarea->estado }}">
-
-                {{ $countS = 0 }}
+            <select name="estado" value="{{ $tarea->estado_key }}">
 
                 @foreach ($statuses as $status)
-                    {{ $countS++ }}
-                    <option value="{{ $countS }}">{{ $status }}</option>
+                    <option value="{{ $status['key'] }}">{{ $status['value'] }}</option>
                 @endforeach
-            </select>
 
+            </select>
         </div>
         <br>
         <div>
             <label>Urgencia:</label>
-            <select name="urgencia" value="{{ $tarea->urgencia }}">
-                {{ $countP = 0 }}
+
+            <select name="urgencia" value="{{ $tarea->urgencia_key }}">
 
                 @foreach ($priorities as $priority)
-                    {{ $countP++ }}
-                    <option value="{{ $countP }}">{{ $priority }}</option>
+                    <option value="{{ $priority['key'] }}">{{ $priority['value'] }}</option>
                 @endforeach
+
             </select>
         </div>
         <br>
@@ -67,7 +62,7 @@
     </form>
     <br>
     <div>
-        <a href="{{ route('tarea.index') }}">Regresar</a>
+        <a href='/'>Regresar</a>
     </div>
 </body>
 

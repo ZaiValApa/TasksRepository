@@ -1,22 +1,26 @@
 <?php
 
+use App\Models\Tarea;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TareaController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
+/*Route::get('/', function () {
+    $tareas = Tarea::where('user_id', auth()->id())->get();
+    $user = User::where('id', auth()->id())->get();
+    return view('users.index', ['tareas' => $tareas], ['user' => $user]);
+});
 */
+Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
+Route::post('/login', [UserController::class, 'login'])->name('user.login');
+Route::post('/users', [UserController::class, 'store'])->name('user.store');
+Route::post('/register', [UserController::class, 'create'])->name('user.create');
 
-Route::get('/', function () {
-    return view('users.index');
+Route::get('/', [UserController::class, 'index'])->name('users.index');
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('tarea', TareaController::class)->except('show');
 });
 
 /*
@@ -27,8 +31,3 @@ Route::get('/tarea/{tarea}/edit',[TareaController::class, 'edit'])->name('tarea.
 Route::put('/tarea/{tarea}/update',[TareaController::class, 'update'])->name('tarea.update');
 Route::delete('/tarea/{tarea}/tarea',[TareaController::class, 'destroy'])->name('tarea.destroy');
 */
-
-Route::resource('tarea', TareaController::class)->except(['show', 'index']);
-Route::resource('user', UserController::class)->except(['show', 'edit', 'update']);
-Route::post('/logout', [UserController::class,'logout']);
-Route::post('/login', [UserController::class,'login']);
