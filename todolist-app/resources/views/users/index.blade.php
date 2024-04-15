@@ -58,8 +58,8 @@
                             <td>{{ $tarea->id }}</td>
                             <td>{{ $tarea->tarea }}</td>
                             <td>{{ $tarea->descripcion }}</td>
-                            <td>{{ $tarea->estado }}</td>
-                            <td>{{ $tarea->urgencia }}</td>
+                            <td>{{ $tarea->estado}}</td>
+                            <td>{{ $tarea->urgencia}}</td>
                             <td><a href="{{ route('tarea.edit', ['tarea' => $tarea]) }}">Editar</a></td>
                             <td>
                                 <form method="post" action="{{ route('tarea.destroy', ['tarea' => $tarea]) }}">

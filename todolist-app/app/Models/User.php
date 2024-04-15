@@ -22,6 +22,6 @@ class User extends Authenticatable
 
     public function usersTareas()
     {
-        return $this->hasMany(Tarea::class, 'user_id');
+       // return $this->hasMany(Tarea::class, 'user_id');
     }
 }

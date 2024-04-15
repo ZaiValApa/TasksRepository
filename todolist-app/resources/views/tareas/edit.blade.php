@@ -36,10 +36,15 @@
         <br>
         <div>
             <label>Estado:</label>
-            <select name="estado" value="{{ $tarea->estado_key }}">
+
+            <select name="estado">
 
                 @foreach ($statuses as $status)
-                    <option value="{{ $status['key'] }}">{{ $status['value'] }}</option>
+                    @if ($tarea->estado == $status['key'])
+                        <option value="{{ $status['key'] }}" selected>{{ $status['value'] }}</option>
+                    @else
+                        <option value="{{ $status['key'] }}">{{ $status['value'] }}</option>
+                    @endif
                 @endforeach
 
             </select>
@@ -48,10 +53,14 @@
         <div>
             <label>Urgencia:</label>
 
-            <select name="urgencia" value="{{ $tarea->urgencia_key }}">
+            <select name="urgencia">
 
                 @foreach ($priorities as $priority)
-                    <option value="{{ $priority['key'] }}">{{ $priority['value'] }}</option>
+                    @if ($tarea->urgencia == $priority['key'])
+                        <option value="{{ $priority['key'] }}" selected>{{ $priority['value'] }}</option>
+                    @else
+                        <option value="{{ $priority['key'] }}">{{ $priority['value'] }}</option>
+                    @endif
                 @endforeach
 
             </select>

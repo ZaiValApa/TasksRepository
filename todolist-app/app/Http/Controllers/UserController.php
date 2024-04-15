@@ -6,14 +6,13 @@ use App\Models\Tarea;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\TareaResource;
-use App\Http\Controllers\TareaController;
-use App\Http\Requests\LoginRequest;
 
 class UserController extends Controller
 {
     public function index()
     {
         $tareas = Tarea::where('user_id', auth()->id())->get();
+
         return view('users.index', ['tareas' => TareaResource::collection($tareas)]);
     }
 

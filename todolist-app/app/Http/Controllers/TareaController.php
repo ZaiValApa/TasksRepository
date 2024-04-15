@@ -1,10 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User;
 use App\Models\Tarea;
 use App\Http\Requests\TareaRequest;
-use App\Http\Resources\TareaResource;
 
 class TareaController extends Controller
 {
