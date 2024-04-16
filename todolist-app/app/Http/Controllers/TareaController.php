@@ -1,18 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Tarea;
 use App\Http\Requests\TareaRequest;
+use App\Http\Resources\TareaResource;
 
 class TareaController extends Controller
 {
-    /* public function index()
+    public function index()
     {
-        $tareas = Tarea::all();
+        $tareas = Tarea::where('user_id', auth()->id())->get();
 
         return view('tareas.index', ['tareas' => TareaResource::collection($tareas)]);
-
-    }*/
+    }
 
     public function create()
     {
@@ -26,9 +27,10 @@ class TareaController extends Controller
     {
         $requestValid = $request->validated();
         $requestValid['user_id'] = auth()->id();
+
         Tarea::create($requestValid);
 
-        return redirect(route('users.index'));
+        return redirect(route('tareas.index'));
     }
 
     public function edit(Tarea $tarea)
@@ -44,13 +46,13 @@ class TareaController extends Controller
     {
         $tarea->update($request->validated());
 
-        return redirect(route('users.index'))->with('success', 'La tarea se ha actualizado correctamente');
+        return redirect(route('tareas.index'))->with('success', 'La tarea se ha actualizado correctamente');
     }
 
     public function destroy(Tarea $tarea)
     {
         $tarea->delete();
 
-        return redirect(route('users.index'))->with('success', 'La tarea se ha borrado correctamente');
+        return redirect(route('tareas.index'))->with('success', 'La tarea se ha borrado correctamente');
     }
 }

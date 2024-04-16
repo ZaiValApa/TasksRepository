@@ -20,7 +20,7 @@
         @endif
     </div>
 
-    <form method="post" action="{{ route('tarea.store') }}">
+    <form method="post" action="{{ route('tareas.store') }}">
         @csrf
         @method('post')
         <div>
@@ -63,7 +63,7 @@
     </form>
     <br>
     <div>
-        <a href="/">Regresar</a>
+        <a href="{{ route('tareas.index') }}">Regresar</a>
     </div>
 </body>
 

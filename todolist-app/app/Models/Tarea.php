@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,7 +20,24 @@ class Tarea extends Model
     public const PROCESSING = 2;
     public const COMPLETED = 3;
 
-    protected $fillable = ['tarea', 'descripcion', 'estado', 'urgencia', 'user_id'];
+    protected $fillable = [
+        'tarea',
+        'descripcion',
+        'estado',
+        'urgencia',
+        'user_id'
+    ];
+
+    protected $casts = [
+        'estado' => 'integer',
+        'urgencia' => 'integer',
+        'user_id' => 'integer'
+    ];
+
+    protected $appends = [
+        'estado_name',
+        'urgencia_name'
+    ];
 
     public static function getPriorities()
     {
@@ -34,15 +50,20 @@ class Tarea extends Model
 
     public static function getStatuses()
     {
-            /* self::WAITING => 'En espera',
-            self::PROCESSING => 'En proceso',
-            self::COMPLETED => 'Completada',*/
         return [
-
             ['key' => self::WAITING, 'value' => 'En espera'],
             ['key' => self::PROCESSING, 'value' => 'En proceso'],
             ['key' => self::COMPLETED, 'value' => 'Completada']
-
         ];
+    }
+
+    public function getEstadoNameAttribute()
+    {
+        return collect(self::getStatuses())->firstWhere('key', $this->estado)['value'];
+    }
+
+    public function getUrgenciaNameAttribute()
+    {
+        return collect(self::getPriorities())->firstWhere('key', $this->urgencia)['value'];
     }
 }
