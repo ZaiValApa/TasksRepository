@@ -17,8 +17,6 @@ return new class extends Migration {
             $table->tinyInteger('estado');
             $table->tinyInteger('urgencia');
             $table->foreignId('user_id')->constrained();
-            $table->softDeletes();
-            $table->timestamps();
         });
     }
 
@@ -27,9 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('tareas', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
         Schema::dropIfExists('tareas');
     }
 };

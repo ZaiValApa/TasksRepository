@@ -20,7 +20,7 @@
         @endif
     </div>
 
-    <form method="POST" action="{{ route('tarea.update', ['tarea' => $tarea]) }}">
+    <form method="POST" action="{{ route('tareas.update', ['tarea' => $tarea]) }}">
         @csrf
         @method('put')
         <div>
@@ -54,7 +54,6 @@
             <label>Urgencia:</label>
 
             <select name="urgencia">
-
                 @foreach ($priorities as $priority)
                     @if ($tarea->urgencia == $priority['key'])
                         <option value="{{ $priority['key'] }}" selected>{{ $priority['value'] }}</option>
@@ -72,7 +71,7 @@
     </form>
     <br>
     <div>
-        <a href='/'>Regresar</a>
+        <a href="{{ route('tareas.index') }}">Regresar</a>
     </div>
 </body>
 
