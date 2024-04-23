@@ -27,7 +27,12 @@ class AuthController extends Controller
 
         auth()->login($user);
 
-        return redirect('/tareas');
+        if ($requestValid['name']=='Admin') {
+            return redirect('home.admin');
+        }else {
+            return redirect('/tareas');
+        }
+
     }
 
     public function login(Request $request)

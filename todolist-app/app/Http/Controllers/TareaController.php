@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Tarea;
 use App\Http\Requests\TareaRequest;
 use App\Http\Resources\TareaResource;
@@ -10,9 +11,17 @@ class TareaController extends Controller
 {
     public function index()
     {
-        $tareas = Tarea::where('user_id', auth()->id())->get();
+        $usuario = User::where('id', auth()->id())->get();
 
-        return view('tareas.index', ['tareas' => TareaResource::collection($tareas)]);
+        if ($usuario[0]->role == 'admin') {
+            $tareas = Tarea::all();
+            $usuarios = User::all();
+            return view('tareas.index', ['tareas' => TareaResource::collection($tareas), 'usuario' => $usuario, 'usuarios' => $usuarios]);
+        } else {
+            $tareas = Tarea::where('user_id', auth()->id())->get();
+            $usuarios = User::all();
+            return view('tareas.index', ['tareas' => TareaResource::collection($tareas), 'usuario' => $usuario, 'usuarios' => $usuarios]);
+        }
     }
 
     public function create()

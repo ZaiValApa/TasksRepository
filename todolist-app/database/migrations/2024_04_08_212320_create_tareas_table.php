@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->tinyInteger('estado');
             $table->tinyInteger('urgencia');
             $table->foreignId('user_id')->constrained();
+            $table->timestamps();
         });
     }
 

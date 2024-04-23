@@ -18,4 +18,5 @@ Route::middleware(['auth'])->group(function () {
 
     // Tasks
     Route::resource('tareas', TareaController::class)->except('show');
+
 });
