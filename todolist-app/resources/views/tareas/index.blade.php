@@ -10,23 +10,29 @@
 
 </head>
 
-<body class="flex items-center justify-center min-h-screen bg-gradient-to-r from-indigo-600 via-blue-500 to-emerald-400">
+<body
+    class="flex flex-col justify-center min-h-screen px-60 bg-gradient-to-r
+from-indigo-600 from-0% via-blue-500 via-30% to-emerald-400 to-100%">
 
-    <div class="p-10 mx-auto bg-white rounded-lg m">
+    <div class="px-10 py-12 bg-white rounded-lg  font-mono">
         <div>
             <form action="{{ route('auth.logout') }}" method="POST">
                 @csrf
-                <button class="float-right px-4 py-3 text-white bg-red-400 rounded-full shadow-sm hover:bg-red-600 hover:text-blue-50">Cerrar Sesión</button>
+                <button
+                    class="float-right px-4 py-3 text-white bg-red-400 rounded-full shadow-sm hover:bg-red-600 hover:text-blue-50">Cerrar
+                    Sesión</button>
             </form>
-            <h1 class="mb-4 text-2xl font-bold text-left">Bienvenido {{ $usuario[0]->name }}!</h1>
+            <h1 class="mb-4   text-left text-3xl font-extrabold tracking-wider  text-blue-500">Bienvenido
+                {{ $usuario[0]->name }}!</h1>
         </div>
         <div>
             @if (session()->has('success'))
-                <div class="text-left text-green-500">{{ session('success') }}</div>
+                <div class="text-left m-auto text-gray-400">{{ session('success') }}</div>
             @endif
         </div>
         <div class="mt-4 text-left">
-            <a href="{{ route('tareas.create') }}" class="text-blue-500">Añadir Tarea</a>
+            <a href="{{ route('tareas.create') }}"
+                class="block w-full  text-blue-600 hover:text-emerald-400">Añadir Tarea</a>
         </div>
         @if ($tareas->isNotEmpty())
             <table class="w-full mt-4 border border-collapse border-gray-500">
@@ -37,7 +43,8 @@
                         <th class="p-2 border border-gray-500">Descripción</th>
                         <th class="p-2 border border-gray-500">Estado</th>
                         <th class="p-2 border border-gray-500">Urgencia</th>
-                        <th class="p-2 border border-gray-500" {{ $usuario[0]->role == 'admin' ? '' : 'hidden' }}>Autor</th>
+                        <th class="p-2 border border-gray-500" {{ $usuario[0]->role == 'admin' ? '' : 'hidden' }}>Autor
+                        </th>
                         <th class="p-2 border border-gray-500">Editar</th>
                         <th class="p-2 border border-gray-500">Borrar</th>
                     </tr>

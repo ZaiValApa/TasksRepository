@@ -10,12 +10,12 @@
 </head>
 
 <body
-    class="flex flex-col justify-center min-h-full px-96 bg-gradient-to-r
+    class="flex flex-col justify-center min-h-screen px-72 bg-gradient-to-r
     from-indigo-600 from-0% via-blue-500 via-30% to-emerald-400 to-100%">
 
     <div class="p-20 m-20 font-mono bg-white rounded-lg">
 
-        <h2 class="pb-5 font-mono text-3xl font-extrabold tracking-wider text-center text-blue-500 ">
+        <h2 class="pb-5  text-3xl font-extrabold tracking-wider text-center text-blue-500 ">
             ¡Registrate ahora!
         </h2>
 
@@ -52,10 +52,10 @@
                 <span class="px-1 text-lg">Registrarse</span>
             </button>
         </form>
-        <div class="pt-5 font-mono text-base tracking-tighter text-center">
+        <div class="pt-5  text-base tracking-tighter text-center">
             ¿Ya posees una cuenta?
-            <a class="font-bold text-blue-400 -tracking-wide hover:text-emerald-400"
-                href="{{ route('login') }}">¡Inicia Sesión
+            <a class="font-bold text-blue-400 -tracking-wide hover:text-emerald-400" href="{{ route('login') }}">¡Inicia
+                Sesión
                 Aquí!</a>
         </div>
 

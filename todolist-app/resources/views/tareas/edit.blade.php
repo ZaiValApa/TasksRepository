@@ -10,11 +10,11 @@
 
 </head>
 
-<body class="flex flex-col justify-center min-h-full px-96 bg-gradient-to-r from-indigo-600 via-blue-500 to-emerald-400">
+<body class="flex flex-col justify-center min-h-full px-72 bg-gradient-to-r from-indigo-600 via-blue-500 to-emerald-400">
 
     <div class="p-20 m-20 font-mono bg-white rounded-lg">
 
-        <h1 class="pb-5 font-mono text-3xl font-extrabold tracking-wider text-center text-blue-500">Editar Tarea</h1>
+        <h1 class="pb-5 text-3xl font-extrabold tracking-wider text-center text-blue-500">Editar Tarea</h1>
 
         <div>
             @if ($errors->any())
