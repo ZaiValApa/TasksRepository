@@ -50,10 +50,9 @@ class TestMail extends Mailable
      */
     public function attachments(): array
     {
-        $pdf='hi';
+
         return [
-            Attachment::fromData(fn () => $pdf, 'Report.pdf')
-            ->withMime('application/pdf'),
+
 
         ];
     }

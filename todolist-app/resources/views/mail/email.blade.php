@@ -11,7 +11,7 @@
 
 <body class="flex flex-col justify-center min-h-screen bg-gradient-to-r
 from-indigo-600 from-0% via-blue-500 via-30% to-emerald-400 to-100%">
-    <div class="w-full align-middle bg-white shadow-lg ">
+    <div class="w-full bg-white shadow-lg ">
         <div class="p-20">
             <h2 class="text-3xl font-extrabold text-center text-blue-500">¡Tarea Completada!</h2>
             <p class="mt-4">Hey Admin,</p>
