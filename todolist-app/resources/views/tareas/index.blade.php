@@ -14,7 +14,7 @@
     class="flex flex-col justify-center min-h-screen px-60 bg-gradient-to-r
 from-indigo-600 from-0% via-blue-500 via-30% to-emerald-400 to-100%">
 
-    <div class="px-10 py-12 bg-white rounded-lg  font-mono">
+    <div class="px-10 py-12 font-mono bg-white rounded-lg">
         <div>
             <form action="{{ route('auth.logout') }}" method="POST">
                 @csrf
@@ -22,17 +22,17 @@ from-indigo-600 from-0% via-blue-500 via-30% to-emerald-400 to-100%">
                     class="float-right px-4 py-3 text-white bg-red-400 rounded-full shadow-sm hover:bg-red-600 hover:text-blue-50">Cerrar
                     Sesión</button>
             </form>
-            <h1 class="mb-4   text-left text-3xl font-extrabold tracking-wider  text-blue-500">Bienvenido
+            <h1 class="mb-4 text-3xl font-extrabold tracking-wider text-left text-blue-500">Bienvenido
                 {{ $usuario[0]->name }}!</h1>
         </div>
         <div>
             @if (session()->has('success'))
-                <div class="text-left m-auto text-gray-400">{{ session('success') }}</div>
+                <div class="m-auto text-left text-gray-400">{{ session('success') }}</div>
             @endif
         </div>
         <div class="mt-4 text-left">
-            <a href="{{ route('tareas.create') }}"
-                class="block w-full  text-blue-600 hover:text-emerald-400">Añadir Tarea</a>
+            <a href="{{ route('tareas.create') }}" class="block w-full text-blue-600 hover:text-emerald-400">Añadir
+                Tarea</a>
         </div>
         @if ($tareas->isNotEmpty())
             <table class="w-full mt-4 border border-collapse border-gray-500">
@@ -58,10 +58,7 @@ from-indigo-600 from-0% via-blue-500 via-30% to-emerald-400 to-100%">
                             <td class="p-2 border border-gray-500">{{ $tarea->estado_name }}</td>
                             <td class="p-2 border border-gray-500">{{ $tarea->urgencia_name }}</td>
                             <td class="p-2 border border-gray-500" {{ $usuario[0]->role == 'admin' ? '' : 'hidden' }}>
-                                @php
-                                    $user = $usuarios->firstWhere('id', $tarea->user_id);
-                                @endphp
-                                {{ $user ? $user->name : '' }}
+                                {{ $tarea->user->name }}
                             </td>
                             <td class="p-2 border border-gray-500">
                                 <a href="{{ route('tareas.edit', ['tarea' => $tarea]) }}"

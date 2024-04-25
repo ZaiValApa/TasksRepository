@@ -18,12 +18,10 @@ class TareaController extends Controller
 
         if ($usuario[0]->role == 'admin') {
             $tareas = Tarea::all();
-            $usuarios = User::all();
-            return view('tareas.index', ['tareas' => TareaResource::collection($tareas), 'usuario' => $usuario, 'usuarios' => $usuarios]);
+            return view('tareas.index', ['tareas' => TareaResource::collection($tareas), 'usuario' => $usuario]);
         } else {
             $tareas = Tarea::where('user_id', auth()->id())->get();
-            $usuarios = User::all();
-            return view('tareas.index', ['tareas' => TareaResource::collection($tareas), 'usuario' => $usuario, 'usuarios' => $usuarios]);
+            return view('tareas.index', ['tareas' => TareaResource::collection($tareas), 'usuario' => $usuario]);
         }
     }
 
