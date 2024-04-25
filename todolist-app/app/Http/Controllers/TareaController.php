@@ -70,7 +70,7 @@ class TareaController extends Controller
        }
         */
         //Mail::to('abc@example.com')->send(new TestMail('a', 'b'));
-        if ($tarea->estado == 3) {
+        //if ($tarea->estado == 3) {
             $user = User::find($tarea->user_id);
             $userName = $user->name;
 
@@ -80,7 +80,7 @@ class TareaController extends Controller
             $adminMail = $admin->email;
 
             Mail::to($adminMail)->send(new TestMail($userName, $tareaMail));
-        }
+        //}
 
         return redirect(route('tareas.index'))->with('success', 'La tarea se ha actualizado correctamente');
     }
