@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,8 +55,15 @@
             font-style: italic;
             color: #4a90e2;
         }
+        .image {
+            width: 8%;
+            display: block;
+            margin: 0 auto;
+        }
+
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -66,9 +74,11 @@
             <p class="message">{{ $name }} ha completado la asignación de {{ $tarea }}.</p>
         </div>
         <div class="footer">
+            <img class="image" src="{{ $imagenUrl }}" alt="Approval Image">
             <p>Saludos,</p>
             <p class="signature">El equipo de Mailtrap</p>
         </div>
     </div>
 </body>
+
 </html>
