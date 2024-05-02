@@ -59,15 +59,15 @@ class TareaController extends Controller
     {
         $tarea->update($request->validated());
 
-        //if ($tarea->estado == 3) {
-        $user = User::find($tarea->user_id);
-        $userName = $user->name;
+        if ($tarea->estado == 3) {
+            $user = User::find($tarea->user_id);
+            $userName = $user->name;
 
-        $tareaMail = $tarea->tarea;
+            $tareaMail = $tarea->tarea;
 
-        $admin = User::where('role', 'admin')->first();
-        $adminMail = $admin->email;
-        /*/
+            $admin = User::where('role', 'admin')->first();
+            $adminMail = $admin->email;
+            /*/
         $pdf = PDF::loadView('mail.pdf', [
             'name' => $userName,
             'tarea' => $tareaMail,
@@ -78,36 +78,32 @@ class TareaController extends Controller
             'tarea' => $tareaMail,
         ], function ($message) use ($adminMail, $pdf) {
             $message->to($adminMail)
-                    ->subject('Notificación de Tarea Completada');
-            $message->from($adminMail);
-            $message->attachData($pdf->output(), 'archivo.pdf');
+                    ->subject('Notificación de Tarea Completada')
+                    ->from($adminMail)
+                    ->attachData($pdf->output(), 'archivo.pdf');
         });
-        }*/
+        */
 
+            $imagenPath = public_path('storage\img\approval.png');
+            $imagenData = file_get_contents($imagenPath);
 
-        $imagenPath = public_path('storage\img\approval.png');
-        $imagenData = file_get_contents($imagenPath);
-
-        $pdf = PDF::loadView('mail.pdf', [
-            'name' => $userName,
-            'tarea' => $tareaMail,
-            'imagenUrl' => $imagenPath,
-        ]);
-
-        Mail::send(
-            'mail.email',
-            [
+            $pdf = PDF::loadView('mail.pdf', [
                 'name' => $userName,
                 'tarea' => $tareaMail,
-            ],
-            function ($message) use ($adminMail, $pdf, $imagenData) {
-                $message
-                    ->to($adminMail)
-                    ->subject('Notificación de Tarea Completada')
-                    ->attachData($pdf->output(), 'archivo.pdf');
-            },
-        );
+                'imagenUrl' => $imagenPath,
+            ]);
 
+            Mail::send(
+                'mail.email',
+                [
+                    'name' => $userName,
+                    'tarea' => $tareaMail,
+                ],
+                function ($message) use ($adminMail, $pdf, $imagenData) {
+                    $message->to($adminMail)->subject('Notificación de Tarea Completada')->attachData($pdf->output(), 'archivo.pdf');
+                },
+            );
+        }
         return redirect(route('tareas.index'))->with('success', 'La tarea se ha actualizado correctamente');
     }
 
