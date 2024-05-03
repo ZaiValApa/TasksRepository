@@ -74,6 +74,9 @@
             <p class="message">{{ $name }} ha completado la asignación de {{ $tarea }}.</p>
         </div>
         <div class="footer">
+            <!--
+                llamado de rutas de imagenes a un pdf(attatchment)
+            -->
             <img class="image" src="{{ $imagenUrl }}" alt="Approval Image">
             <p>Saludos,</p>
             <p class="signature">El equipo de Mailtrap</p>

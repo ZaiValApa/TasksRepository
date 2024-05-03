@@ -5,13 +5,14 @@ namespace App\Notifications;
 use App\Models\Tarea;
 use Illuminate\Bus\Queueable;
 use Illuminate\Foundation\Auth\User;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
+
+//use Illuminate\Contracts\Queue\ShouldQueue;
+
 use Illuminate\Notifications\Messages\MailMessage;
 
-use Barryvdh\DomPDF\Facade\Pdf as PDF;
-
-class TaskNotification extends Notification implements ShouldQueue
+class TaskNotification extends Notification
 {
     use Queueable;
 
@@ -23,6 +24,7 @@ class TaskNotification extends Notification implements ShouldQueue
 
     public function __construct(User $user, Tarea $tarea)
     {
+        //tomando valores que he mandado
         $this->user = $user;
         $this->tarea = $tarea;
     }
@@ -32,6 +34,7 @@ class TaskNotification extends Notification implements ShouldQueue
      *
      * @return array<int, string>
      */
+
     public function via(object $notifiable): array
     {
         return ['mail'];
@@ -40,11 +43,13 @@ class TaskNotification extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      */
+
     public function toMail(object $notifiable): MailMessage
     {
 
         //ruta de img
         $imagenPath = public_path('storage\img\approval.png');
+
         //creación de pdf
         $pdf = PDF::loadView('mail.pdf', [
             'name' => $this->user->name,
@@ -55,6 +60,7 @@ class TaskNotification extends Notification implements ShouldQueue
         //convertir pdf a string
         $pdfContent = $pdf->output();
 
+        //enviando mensaje con attachment de pdf
         return (new MailMessage())
             ->view('mail.email', [
                 'name' => $this->user->name,
@@ -69,6 +75,7 @@ class TaskNotification extends Notification implements ShouldQueue
      *
      * @return array<string, mixed>
      */
+
     public function toArray(object $notifiable): array
     {
         return [

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Tarea;
 
-use Barryvdh\DomPDF\Facade\Pdf as PDF;
+//Libreria para crear PDF
+//use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 use App\Http\Requests\TareaRequest;
 
@@ -69,9 +70,12 @@ class TareaController extends Controller
         if ($tarea->estado == 3) {
             //Encontrando nombre de usuario
             $user = User::find($tarea->user_id);
-            $userName = $user->name;
+
+            //$userName = $user->name;
+
             //la tarea que se realiza
-            $tareaMail = $tarea->tarea;
+            //$tareaMail = $tarea->tarea;
+
             //el correo del Admin
             $admin = User::where('role', 'admin')->first();
 

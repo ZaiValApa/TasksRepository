@@ -18,7 +18,10 @@ from-indigo-600 from-0% via-blue-500 via-30% to-emerald-400 to-100%">
             <p class="mt-4">Hey Admin,</p>
             <p>{{ $name }} ha completado la asignación de {{ $tarea }}.</p>
             <br>
-            <!--<img src="cid:approval.png" style="max-width: 10%; height: auto;" alt="Approval Image">-->
+            <!--
+                prueba agregando imagenes a un email
+                <img src="cid:approval.png" style="max-width: 10%; height: auto;" alt="Approval Image">
+            -->
             <br>
             <p class="text-left">Saludos,<br>El equipo de Mailtrap</p>
         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\SendEmail;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -12,7 +13,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        //schedule para enviar email con excel
+      $schedule->job(new SendEmail)->dailyAt('14:45')->timezone('America/El_Salvador');
     }
 
     /**
