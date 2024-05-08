@@ -21,7 +21,13 @@ class Tarea extends Model
     public const PROCESSING = 2;
     public const COMPLETED = 3;
 
-    protected $fillable = ['tarea', 'descripcion', 'estado', 'urgencia', 'user_id'];
+    protected $fillable = [
+        'tarea',
+        'descripcion',
+        'estado',
+        'urgencia',
+        'user_id'
+    ];
 
     protected $casts = [
         'estado' => 'integer',

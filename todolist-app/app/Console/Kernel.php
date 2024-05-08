@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\SendDailyTaskReport;
 use App\Jobs\SendEmail;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -14,7 +15,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         //schedule para enviar email con excel
-      $schedule->job(new SendEmail)->dailyAt('14:45')->timezone('America/El_Salvador');
+      $schedule->job(new SendDailyTaskReport)
+        ->dailyAt('20:00')
+        ->timezone('America/El_Salvador');
     }
 
     /**

@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Tarea;
+use App\Exports\TaskExport;
 
 //Libreria para crear PDF
 //use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 use App\Http\Requests\TareaRequest;
 
+use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Resources\TareaResource;
+use App\Jobs\SaveCompletedTaskToExcel;
 use App\Notifications\TaskNotification;
 use Illuminate\Support\Facades\Notification;
 
@@ -29,6 +33,7 @@ class TareaController extends Controller
             $tareas = Tarea::where('user_id', auth()->id())->get();
             return view('tareas.index', ['tareas' => TareaResource::collection($tareas), 'usuario' => $usuario]);
         }
+
     }
 
     public function create()
@@ -71,10 +76,10 @@ class TareaController extends Controller
             //Encontrando nombre de usuario
             $user = User::find($tarea->user_id);
 
-            //$userName = $user->name;
+            $userName = $user->name;
 
             //la tarea que se realiza
-            //$tareaMail = $tarea->tarea;
+            $tareaMail = $tarea->tarea;
 
             //el correo del Admin
             $admin = User::where('role', 'admin')->first();
@@ -82,19 +87,13 @@ class TareaController extends Controller
             //manda notificación/email
             $notification = new TaskNotification($user, $tarea);
             Notification::send($admin, $notification);
-            /*
-            Mail::send(
-                'mail.email',
-                [
-                    'name' => $userName,
-                    'tarea' => $tareaMail,
-                ],
-                function ($message) use ($adminMail, $pdf) {
-                    $message->to($adminMail)->subject('Notificación de Tarea Completada')->attachData($pdf->output(), 'archivo.pdf');
-                },
-            );
-            */
+
+            //SaveCompletedTaskToExcel::dispatch($tarea);
+            // dispatch(new SaveCompletedTaskToExcel($tarea));
         }
+
+        //return Excel::download(new TaskExport($tareas), 'tasks.xlsx');
+
         //mensaje de éxito
         return redirect(route('tareas.index'))->with('success', 'La tarea se ha actualizado correctamente');
     }
@@ -106,4 +105,5 @@ class TareaController extends Controller
         //mensaje de éxito
         return redirect(route('tareas.index'))->with('success', 'La tarea se ha borrado correctamente');
     }
+
 }
